@@ -52,10 +52,12 @@ router.post("/signin", (req, res) => {
     console.log(req.body)
     const { roll_no, password } = req.body;
     if (!roll_no || !password) {
+        console.log(roll_no);
         return res.status(422).json({ error: "please add roll_no amd password" });
     }
     Student.findOne({ roll_no: roll_no }).then((savedUser) => {
         if (!savedUser) {
+            console.log(roll_no);
             return res.status(422).json({ error: "Invalid roll_no or password" });
         }
         bcrypt
@@ -70,13 +72,16 @@ router.post("/signin", (req, res) => {
                         user: savedUser
                     });
                 } else {
+                    console.log(roll_no);
                     return res.status(422).json({ error: "Invalid roll_no or password" });
                 }
             })
             .catch((err) => {
                 console.log(err);
+                console.log(roll_no);
             });
     });
+    console.log(roll_no);
 });
 
 router.get("/profile", requireLogin, (req, res) => {
