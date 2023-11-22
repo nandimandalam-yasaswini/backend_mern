@@ -48,7 +48,7 @@ router.post("/signup", (req, res) => {
         });
 });
 
-router.post("/signin", (req, res) => {
+router.get("/signin", (req, res) => {
     console.log(req.body)
     const { roll_no, password } = req.body;
     if (!roll_no || !password) {
